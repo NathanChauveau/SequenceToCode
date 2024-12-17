@@ -1,0 +1,36 @@
+@startuml
+class Entreprise
+class Driver
+class Person
+class Vehicule
+exception DriverNotFoundException 
+exception VehiculeNotFoundException
+exception VehiculeAlreadyAssignedException
+
+Entreprise : - drivers Driver[]
+Entreprise : - vehicules Vehicule[]
+Entreprise : +assignVehiculeToDriver(chassisNumber string, driverEmailaddress string) : void
+Entreprise : -getDriverByEmailaddress(driverEmailaddress string) : Driver
+Entreprise : -getVehiculeByChassisNumber(chassisNumber string) : Vehicule
+
+Driver : - vehicule Vehicule
+Driver : +takeAVehicule(vehicule Vehicule) : void
+
+Person : - addressEmail string
+Person : +Person(emailaddress string)
+Person : +getEmail() : string
+
+Vehicule : +Vehicule(registration : string, brand : string, model : string, chassisNumber : string )
+Vehicule : +toString() : string
+Vehicule : - chassisNumber string 
+
+
+Entreprise o-- Driver
+Entreprise o-- Vehicule
+Driver --|> Person
+Driver ..> Vehicule
+Entreprise +-- DriverNotFoundException 
+Entreprise +-- VehiculeNotFoundException 
+Driver +-- VehiculeAlreadyAssignedException 
+
+@enduml
