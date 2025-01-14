@@ -7,27 +7,40 @@ exception DriverNotFoundException
 exception VehiculeNotFoundException
 exception VehiculeAlreadyAssignedException
 
-Entreprise : - drivers Driver[]
+Entreprise : -drivers : Driver[]
+Entreprise : -vehicules : Vehicule[]
 Entreprise : +assignVehiculeToDriver(chassisNumber string, driverEmailaddress string) : void
-Entreprise : +getDriverByEmailaddress(driverEmailaddress string) : Driver
-Entreprise : +getVehiculeByChassisNumber(chassisNumber string) : Vehicule
-Entreprise : +loopDrivers(drivers Driver[])
-Entreprise : +loopVehicule(vehicules Vehicule[])
+Entreprise : -getDriverByEmailaddress(driverEmailaddress string) : Driver
+Entreprise : -getVehiculeByChassisNumber(chassisNumber string) : Vehicule
 
-Driver : +Driver(emailaddress : string) 
+Driver : -vehicule : Vehicule
 Driver : +takeAVehicule(vehicule Vehicule) : void
 
-Person : - addressEmail string
+Person : -addressEmail : string
+Person : +Person(emailaddress string)
+Person : +getEmail() : string
 
 Vehicule : +Vehicule(chassisNumber : string)
-Vehicule : - chassisNumber string 
+Vehicule : +toString() : string
+Vehicule : -chassisNumber : string 
+ 
 
-
-Entreprise ..> Driver
-Entreprise ..> Vehicule
+Entreprise o-- Driver
+Entreprise o-- Vehicule
 Driver --|> Person
-Entreprise ..> DriverNotFoundException : << throw >>
-Entreprise ..> VehiculeNotFoundException : << throw >>
-Driver ..> VehiculeAlreadyAssignedException : << throw >>
+Entreprise +-- DriverNotFoundException 
+Entreprise +-- VehiculeNotFoundException 
+Driver ..> Vehicule
+Driver --> Vehicule
+Driver ..> VehiculeAlreadyAssignedException : << throw >> 
+
+note "Première possibilité pour les exceptions" as N1
+note "Second possibilité pour les exceptions" as N2
+note "Selon les données de l'exercise, les 2 relations sont possible. Si Vehicule aurait demandé Driver, relation Bidirection aurait était là" as N3
+Driver .. N3
+Vehicule .. N3
+DriverNotFoundException .. N1
+VehiculeNotFoundException .. N1
+VehiculeAlreadyAssignedException .. N2
 
 @enduml
