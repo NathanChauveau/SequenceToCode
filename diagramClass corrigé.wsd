@@ -1,11 +1,22 @@
 @startuml
-class Entreprise
-class Driver
-class Person
-class Vehicule
-exception DriverNotFoundException 
-exception VehiculeNotFoundException
-exception VehiculeAlreadyAssignedException
+skinparam classAttributeIconSize 0
+<style>
+classDiagram {
+  header {
+    fontstyle bold
+    
+  }
+
+}
+</style>
+
+class Entreprise #line.bold
+class Driver #line.bold
+class Person #line.bold
+class Vehicule #line.bold
+exception DriverNotFoundException #IMPLEMENTATION;line.bold
+exception VehiculeNotFoundException #IMPLEMENTATION;line.bold
+exception VehiculeAlreadyAssignedException #IMPLEMENTATION;line.bold
 
 Entreprise : -drivers : Driver[]
 Entreprise : -vehicules : Vehicule[]
@@ -31,16 +42,8 @@ Driver --|> Person
 Entreprise +-- DriverNotFoundException 
 Entreprise +-- VehiculeNotFoundException 
 Driver ..> Vehicule
-Driver --> Vehicule
 Driver ..> VehiculeAlreadyAssignedException : << throw >> 
 
-note "Première possibilité pour les exceptions" as N1
-note "Second possibilité pour les exceptions" as N2
-note "Selon les données de l'exercise, les 2 relations sont possible. Si Vehicule aurait demandé Driver, relation Bidirection aurait était là" as N3
-Driver .. N3
-Vehicule .. N3
-DriverNotFoundException .. N1
-VehiculeNotFoundException .. N1
-VehiculeAlreadyAssignedException .. N2
+
 
 @enduml
