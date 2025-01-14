@@ -5,6 +5,7 @@ class Person
 class Vehicule
 class TruckDriver
 class Truck
+class Delivery
 exception DriverNotFoundException 
 exception VehiculeNotFoundException
 exception DriverNotAvailabelException
@@ -32,11 +33,16 @@ Vehicule : +Vehicule(chassisNumber : string)
 Vehicule : +toString() : string
 Vehicule : -chassisNumber : string 
 
-TruckDriver : -licenseDate : datetime
+TruckDriver : -licenseDateExpiration : datetime
 TruckDriver : +setVehicule() : Vehicule
 TruckDriver : +securityCheck() : void
+TruckDriver : -prepareDelivery(delivery Delivery) : void
 
 Truck : -canTakeDangerItems : bool
+
+Delivery : -hazardousMaterial : bool
+Delivery : -material :  string[]
+Delivery : +Delivery(material : string[], hazardousMaterial : bool)
 
 
 Entreprise o-- Driver
@@ -47,6 +53,7 @@ Truck --|> Vehicule
 Entreprise +-- DriverNotFoundException 
 Entreprise +-- VehiculeNotFoundException 
 Driver ..> Vehicule
+TruckDriver ..> Delivery
 Driver ..> DriverNotAvailabelException : << throw >> 
 TruckDriver ..> DriverNotAvailabelException : << throw >> 
 TruckDriver ..> TruckHazardousMaterialException : << throw >>
