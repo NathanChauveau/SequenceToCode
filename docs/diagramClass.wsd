@@ -3,15 +3,24 @@ class Entreprise
 class Driver
 class Person
 class Vehicule
+class TruckDriver
+class Truck
+class Delivery
 exception DriverNotFoundException 
 exception VehiculeNotFoundException
-exception VehiculeAlreadyAssignedException
+exception DriverNotAvailabelException
+exception TruckHazardousMaterialException
+exception TruckDriverHazardousicenseException
+
 
 Entreprise : -drivers : Driver[]
 Entreprise : -vehicules : Vehicule[]
+Entreprise : -drivers : TruckDriver[]
+Entreprise : -vehicules : Truck[]
 Entreprise : +assignVehiculeToDriver(chassisNumber string, driverEmailaddress string) : void
 Entreprise : -getDriverByEmailaddress(driverEmailaddress string) : Driver
 Entreprise : -getVehiculeByChassisNumber(chassisNumber string) : Vehicule
+Entreprise : -orderDelivery(material : string[], hazardousMaterial=false : boolean) : void
 
 Driver : -vehicule : Vehicule
 Driver : +takeAVehicule(vehicule Vehicule) : void
@@ -23,24 +32,31 @@ Person : +getEmail() : string
 Vehicule : +Vehicule(chassisNumber : string)
 Vehicule : +toString() : string
 Vehicule : -chassisNumber : string 
- 
+
+TruckDriver : -licenseDateExpiration : datetime
+TruckDriver : +setVehicule() : Vehicule
+TruckDriver : +securityCheck() : void
+TruckDriver : -prepareDelivery(delivery Delivery) : void
+
+Truck : -canTakeDangerItems : bool
+
+Delivery : -hazardousMaterial : bool
+Delivery : -material :  string[]
+Delivery : +Delivery(material : string[], hazardousMaterial : bool)
+
 
 Entreprise o-- Driver
 Entreprise o-- Vehicule
 Driver --|> Person
+TruckDriver --|> Driver
+Truck --|> Vehicule
 Entreprise +-- DriverNotFoundException 
 Entreprise +-- VehiculeNotFoundException 
 Driver ..> Vehicule
-Driver --> Vehicule
-Driver ..> VehiculeAlreadyAssignedException : << throw >> 
-
-note "Première possibilité pour les exceptions" as N1
-note "Second possibilité pour les exceptions" as N2
-note "Selon les données de l'exercise, les 2 relations sont possible. Si Vehicule aurait demandé Driver, relation Bidirection aurait était là" as N3
-Driver .. N3
-Vehicule .. N3
-DriverNotFoundException .. N1
-VehiculeNotFoundException .. N1
-VehiculeAlreadyAssignedException .. N2
+TruckDriver ..> Delivery
+Driver ..> DriverNotAvailabelException : << throw >> 
+TruckDriver ..> DriverNotAvailabelException : << throw >> 
+TruckDriver ..> TruckHazardousMaterialException : << throw >>
+TruckDriver ..> TruckDriverHazardousicenseException : << throw >>
 
 @enduml
