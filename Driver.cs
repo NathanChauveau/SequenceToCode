@@ -3,27 +3,25 @@ namespace Carfleet
     public class Driver : Person
     {
         #region private attributes
-        private Vehicule _vehicule = null
+        private Vehicle _vehicle = null;
         #endregion private attributes
 
         #region public methods
-
         public Driver(string emailaddress) : base(emailaddress) { }
 
-        public function takeVehicule(vehicule : Vehicule) : void
+        //STEP 1.3
+        public void TakeAVehicle(Vehicle vehicle)
         {
-            if(_vehicule != null){
-                throw new VehicleAlreadyAssignedException
+            if (_vehicle != null)
+            {
+                throw new VehicleAlreadyAssignedException();
             }
-            _vehicule = vehicule;
+            _vehicle = vehicle;
         }
         #endregion public methods
 
-        #region private methods
-        #endregion private methods
-
         #region nesteded classes
-        public class DriverException : Exception { }
+        public class DriverException : Exception { } //Not mandatory
         public class VehicleAlreadyAssignedException : DriverException { }
         #endregion nested classes
     }
