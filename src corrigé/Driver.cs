@@ -14,17 +14,17 @@ namespace Carfleet
         {
             if(_vehicule != null){
                 throw new VehicleAlreadyAssignedException
-    }
-    _vehicule = vehicule;
+            }
+            _vehicule = vehicule;
         }
-#endregion public methods
+        #endregion public methods
 
-#region private methods
-#endregion private methods
+        #region private methods
+        #endregion private methods
 
-#region nesteded classes
-public class DriverException : Exception { }
-public class VehicleAlreadyAssignedException : DriverException { }
+        #region nesteded classes
+        public class DriverException : Exception { }
+        public class VehicleAlreadyAssignedException : DriverException { }
         #endregion nested classes
     }
 }
