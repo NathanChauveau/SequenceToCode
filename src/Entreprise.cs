@@ -39,18 +39,23 @@ namespace Carfleet
         public function assignVehiculeToDriver(string chassisNumber, string driverEmailAddress) : void
         {
             Driver driver = this.getDriverByEmailaddress(driverEmailAddress);
-    }
+        }
+
+        public function orderDelivery(string[] material, bool hazardousMaterial = false) : void //recheck param2
+        { 
+
+        }
 
 
-    #endregion public methods
+#endregion public methods
 
-    #region private methods
-    #endregion private methods
+#region private methods
+#endregion private methods
 
-    #region nesteded class
-    public class EnterpriseException : Exception { }
-    public class VehicleNotFoundException : EnterpriseException { }
-    public class DriverNotFoundException : EnterpriseException { }
+#region nesteded class
+public class EnterpriseException : Exception { }
+public class VehicleNotFoundException : EnterpriseException { }
+public class DriverNotFoundException : EnterpriseException { }
     #endregion nesteded class
 }
 }
