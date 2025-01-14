@@ -3,19 +3,23 @@ class Entreprise
 class Driver
 class Person
 class Vehicule
+class TruckDriver
+class Truck
 exception DriverNotFoundException 
 exception VehiculeNotFoundException
 exception DriverNotAvailabelException
+exception TruckHazardousMaterialException
+exception TruckDriverHazardousicenseException
 
 
-
-Entreprise : -drivers : TruckDriver[]
-Entreprise : -vehicules : Truck[]
 Entreprise : -drivers : Driver[]
 Entreprise : -vehicules : Vehicule[]
+Entreprise : -drivers : TruckDriver[]
+Entreprise : -vehicules : Truck[]
 Entreprise : +assignVehiculeToDriver(chassisNumber string, driverEmailaddress string) : void
 Entreprise : -getDriverByEmailaddress(driverEmailaddress string) : Driver
 Entreprise : -getVehiculeByChassisNumber(chassisNumber string) : Vehicule
+Entreprise : -orderDelivery(material : string[], hazardousMaterial=false : boolean) : void
 
 Driver : -vehicule : Vehicule
 Driver : +takeAVehicule(vehicule Vehicule) : void
@@ -27,15 +31,25 @@ Person : +getEmail() : string
 Vehicule : +Vehicule(chassisNumber : string)
 Vehicule : +toString() : string
 Vehicule : -chassisNumber : string 
- 
+
+TruckDriver : -licenseDate : datetime
+TruckDriver : +setVehicule() : Vehicule
+TruckDriver : +securityCheck() : void
+
+Truck : -canTakeDangerItems : bool
+
 
 Entreprise o-- Driver
 Entreprise o-- Vehicule
 Driver --|> Person
+TruckDriver --|> Driver
+Truck --|> Vehicule
 Entreprise +-- DriverNotFoundException 
 Entreprise +-- VehiculeNotFoundException 
 Driver ..> Vehicule
 Driver ..> DriverNotAvailabelException : << throw >> 
-
+TruckDriver ..> DriverNotAvailabelException : << throw >> 
+TruckDriver ..> TruckHazardousMaterialException : << throw >>
+TruckDriver ..> TruckDriverHazardousicenseException : << throw >>
 
 @enduml
