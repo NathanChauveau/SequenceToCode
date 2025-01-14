@@ -5,14 +5,16 @@ namespace Carfleet
         #region private attributes
         private List<Vehicule> _vehicule = new List<Vehicule>()
         private List<Driver> _driver = new List<Driver>()
+        private List<Truck> _truck = new List<Truck>()
+        private List<TruckDriver> _truckdriver = new List<TruckDriver>()
         #endregion private attributes
         private Vehicule VehiculeByChassisNumber(string chassisNumber)
         {
-            foreach (Vehicule vehicule in _vehicule)
+            foreach (Truck truck in _truck)
             {
-                if (vehicule.chassisNumber == chassisNumber)
+                if (truck.chassisNumber == chassisNumber)
                 {
-                    return vehicule;
+                    return truck;
                 }
             }
             throw new VehicleNotFoundException();
@@ -20,11 +22,11 @@ namespace Carfleet
 
         private Driver GetDriverByEmailaddress(string driverEmailAddress)
         {
-            foreach (Driver driver in _driver)
+            foreach (Truckdriver truckdriver in _truckdriver)
             {
-                if (driver.emailaddress == driverEmailAddress)
+                if (truckdriver.emailaddress == driverEmailAddress)
                 {
-                    return driver;
+                    return truckdriver;
                 }
             }
             throw new DriverNotFoundException();
