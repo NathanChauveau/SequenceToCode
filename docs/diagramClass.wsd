@@ -5,8 +5,12 @@ class Person
 class Vehicule
 exception DriverNotFoundException 
 exception VehiculeNotFoundException
-exception VehiculeAlreadyAssignedException
+exception DriverNotAvailabelException
 
+
+
+Entreprise : -drivers : TruckDriver[]
+Entreprise : -vehicules : Truck[]
 Entreprise : -drivers : Driver[]
 Entreprise : -vehicules : Vehicule[]
 Entreprise : +assignVehiculeToDriver(chassisNumber string, driverEmailaddress string) : void
